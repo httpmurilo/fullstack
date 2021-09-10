@@ -1,6 +1,8 @@
 package com.murilo.dsvendas.services;
 
 import com.murilo.dsvendas.dto.SaleDTO;
+import com.murilo.dsvendas.dto.SaleSucessDTO;
+import com.murilo.dsvendas.dto.SaleSumDTO;
 import com.murilo.dsvendas.entities.Sale;
 import com.murilo.dsvendas.repository.SaleRepository;
 import com.murilo.dsvendas.repository.SellerRepository;
@@ -26,7 +28,16 @@ public class SaleService {
     public Page<SaleDTO> findAll(Pageable pageable) {
         sellerRepository.findAll();
         Page<Sale> result = repository.findAll(pageable);
-        //return result.stream().map(x -> new SaleDTO(x)).collect(Collectors.toList());
         return result.map(SaleDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSumDTO> amountGroupedBySeller() {
+        return repository.amountGroupedBySeller();
+    }
+
+    @Transactional(readOnly = true)
+    public List<SaleSucessDTO> sucessGroupedBySeller() {
+        return repository.sucessGroupedBySeller();
     }
 }
