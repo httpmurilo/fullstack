@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from 'utils/request';
-import { SalePage, SaleSum } from 'types/sale';
+import { SalePage } from 'types/sale';
 import { useEffect, useState } from "react";
 import { formatLocalDate } from 'utils/format';
 import  Pagination  from 'components/Pagination';
